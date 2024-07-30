@@ -1,15 +1,13 @@
 import { EventsTrackerEvent } from '@/lib/types';
 import EventCard from './EventCard';
+import { getEvents } from '@/lib/utils';
 
 type EventsListProps = {
   city: string;
 };
 
 const EventsList = async ({ city }: EventsListProps) => {
-  const response = await fetch(
-    `https://bytegrad.com/course-assets/projects/evento/api/events?city=${city}`
-  );
-  const events: EventsTrackerEvent[] = await response.json();
+  const events = await getEvents(city);
 
   return (
     <section className="max-w-[1100px] flex flex-wrap gap-10 justify-center px-[20px]">
